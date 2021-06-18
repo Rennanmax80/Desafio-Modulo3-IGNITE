@@ -3,11 +3,13 @@
 /* eslint-disable react/no-danger */
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
-import { RichText } from 'prismic-dom';
-import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
-import Prismic from '@prismicio/client';
 import { useRouter } from 'next/router';
 import { format } from 'date-fns';
+
+import { RichText } from 'prismic-dom';
+
+import Prismic from '@prismicio/client';
+import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
 import ptBR from 'date-fns/locale/pt-BR';
 import Link from 'next/link';
 import Header from '../../components/Header';
@@ -15,6 +17,8 @@ import { getPrismicClient } from '../../services/prismic';
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
+import { Comments } from '../../components/Coments';
+import { FooterNav } from '../../components/FooterNav';
 
 interface Post {
   first_publication_date: string | null;
@@ -126,6 +130,8 @@ export default function Post({
           })}
         </div>
         <footer className={styles.footer}>
+          <FooterNav navigation={navigation} />
+          <Comments />
           {preview && (
             <aside>
               <Link href="/api/exit-preview">
